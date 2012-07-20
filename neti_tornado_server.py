@@ -23,7 +23,7 @@ class MainHandler(tornado.web.RequestHandler):
 
     def post(self):
         self.set_header('Content-type', 'text/plain')
-        data = self.get_argument('data')
+        data = self.get_argument('data', '', False)
         try:
           from_web_form = self.get_arguments('from_web_form')[0] == 'true'
         except:
