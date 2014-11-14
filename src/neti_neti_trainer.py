@@ -14,7 +14,7 @@ All rights resersved.
 import nltk
 import random
 import os
-from neti_neti_helper import strip_token, get_words_slice
+from neti_neti_helper import strip_token, get_words_slice, get_ascii_ratio
 
 class NetiNetiTrainer:
     """A class that defines the training algorithm and the training files
@@ -257,6 +257,7 @@ class NetiNetiTrainer:
         features["char-2_second_word_in_pc"]  = (char_before_last_second
                 in penultimate_chars)
 
+        features["ascii_ratio"] = get_ascii_ratio(words)
         # TODO BUG!!!! remove after refactoring
         # features["char-2_first_word_in_pc"] = char_before_last_second
         # end BUG

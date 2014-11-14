@@ -67,6 +67,18 @@ def strip_token(token):
     """
     return(right_strip(left_strip(token)[0])[0])
 
+def get_ascii_ratio(words):
+    """Calculates ascii/nonascii ratio in a words
+
+    Arguments:
+    words -- list of words
+    """
+    words_string = ''.join(words)
+    nonascii_num = reduce( lambda x, y: x+1 if (ord(y) > 128) else x,
+                         words_string, 0)
+    return nonascii_num/len(words_string)
+
+
 def get_words_slice(words,
         word_index,
         first_char_index,
