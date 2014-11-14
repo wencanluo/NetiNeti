@@ -2,6 +2,7 @@
 *.swp
 *.bak
 virtualenv*
+venv
 test_result_after*
 tags
 build
