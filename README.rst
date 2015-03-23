@@ -30,11 +30,11 @@ Neti-Neti taxon finder.
 Input: Any text preferably in English
 Output: A list of Scientific Names in the text
 
-To run it:
-$ python neti_http_server.py
+To run it: (Add a config file named as "neti_http_config.cfg" in the folder config)
+  $ python neti_http_server.py
 
 To use webservice:
-$ ruby webservices/ruby/taxon_finder_web_service.rb
+  $ ruby webservices/ruby/taxon_finder_web_service.rb
 
 API:
 (use your server name instead of localhost:4567)
