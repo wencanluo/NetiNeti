@@ -21,7 +21,8 @@ Setting up VirtualEnv (Linux)
 Dependencies
 ============
 
-  * nltk >= 2.09b3. Run nltk.download() to get neccessary corpus
+  * nltk >= 2.09b3. Run nltk.download() to get neccessary corpus. 
+  Just download all the data and packages if you don't know which one to choose. 
 
 Description
 ===========
