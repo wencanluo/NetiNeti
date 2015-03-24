@@ -6,6 +6,8 @@ import shlex
 import math
 import sys
 import time
+import os
+import difflib
 
 num_cycles = 3
 
@@ -14,6 +16,15 @@ if len(sys.argv) > 1:
         num_cycles =  int(sys.argv[1]) + 1
     except ValueError:
         pass
+
+def mean(population):
+    ave = 0.0
+    n=0
+    for x in population:
+        n = n + 1
+        ave = ave + x
+
+    return ave / n
 
 def variance(population):
     n = 0
@@ -49,31 +60,38 @@ for i in range(1, num_cycles):
     result = nn.find_names(open("data/test.txt").read())
     print "Name finding time: %s" % (time.clock() - time_start)
 
-    test_result_file = open("data/test_result_after_refactoring.txt", 'w')
-
-    for i in result[1]:
-        test_result_file.write(i + "\n")
-
-    test_result_file.close()
-
-    args = shlex.split('diff -d  data/test_result_before_refactoring.txt data/test_result_after_refactoring.txt')
-    result = subprocess.Popen(args, stdout = subprocess.PIPE, stderr= subprocess.PIPE).communicate()
-    result = result[0].split("\n")
+    test_result_before_refactoring = open('data/test_result_before_refactoring.txt').read().splitlines()
+    test_result_after_refactoring = open('data/test_result_after_refactoring.txt').read().splitlines()
+    
+    d = difflib.Differ()
+    delta = d.compare(test_result_before_refactoring, test_result_after_refactoring)
+    
     ins = []
     outs = []
-    for i in result:
+    for i in delta:
         if len(i) > 0:
-            if i[0] == '>':
+            if i[0] == '+': #insert
                 outs.append(i.strip())
-            if i[0] == '<':
+            if i[0] == '-': #delete
                 ins.append(i.strip())
         differences = ins + outs
-    population.append(len(differences))
+    
+    #recall = TP / N_before
+    recall = (len(test_result_before_refactoring) - len(outs)) * 1.0/len(test_result_before_refactoring)
+    
+    #precision = TP/N_after
+    precision = (len(test_result_after_refactoring) - len(outs)) * 1.0/len(test_result_before_refactoring)
+    
+    f1_score = 2*recall * precision / (recall + precision)
+    
+    population.append([recall, precision, f1_score])
 
-dev = standard_deviation(population)
+#get the average precision, recall and f-measure
 
-sum = 0
-for i in population:
-    sum = sum + i
-set = ','.join([str(p) for p in population])
-print "Mean: %s, St. dev: %s, set: %s" % (float(sum)/float(len(population)), dev, set)
+recalls = [p[0] for p in population]
+precisions = [p[1] for p in population]
+f1_scores = [p[2] for p in population]
+
+print '', '\t', 'recall', '\t', 'precision', '\t', 'f1_score'
+print 'Mean', '\t', mean(recalls), '\t', mean(precisions), '\t', mean(f1_scores)
+#print 'St.d', '\t', standard_deviation(recalls), '\t', standard_deviation(precisions), '\t', standard_deviation(f1_scores)
