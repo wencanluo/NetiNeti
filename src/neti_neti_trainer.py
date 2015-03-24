@@ -100,7 +100,7 @@ class NetiNetiTrainer:
 
         """
         featuresets = []
-        ndata = open(self._negative_training_file).read()
+        ndata = open(self._negative_training_file).read().decode('utf-8')
         ntokens = nltk.word_tokenize(ndata)
         neg_trigrams = nltk.trigrams(ntokens)
         index = -1
@@ -151,9 +151,10 @@ class NetiNetiTrainer:
         """ Creates features set from prepared positive training data """
         featuresets = []
         for data in positive_training_data:
-            name = data['name']
-            context = data['context']
+            name = data['name'].decode('utf-8')
+            context = data['context'].decode('utf-8')
             context_tokens = nltk.word_tokenize(context)
+               
             name_tokens = nltk.word_tokenize(name)
             try:
                 index = context_tokens.index(name_tokens[0])
