@@ -103,7 +103,7 @@ class NetiNeti():
                 and self._is_a_name(tokens[0], tokens, 0, 0)):
                 self._names_list.append(tokens[0])
         else:
-            trigrams = nltk.trigrams(tokens)
+            trigrams = list(nltk.trigrams(tokens))
             self._walk_trigrams(trigrams, tokens)
             self._check_last_bigram_unigram(trigrams[-1], tokens)
         return self._generate_output()
