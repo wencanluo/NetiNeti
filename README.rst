@@ -3,7 +3,7 @@ NetiNeti -- Scientific Names Discovery Tool
 ===========================================
 
 
-Setting up VirtualEnv
+Setting up VirtualEnv (Linux)
 =====================
   
   * install virtualenv (easy_install virtualenv or pip install virtualenv)
@@ -21,7 +21,8 @@ Setting up VirtualEnv
 Dependencies
 ============
 
-  * nltk >= 2.09b3
+  * nltk >= 2.09b3. Run nltk.download() to get neccessary corpus. 
+  Just download all the data and packages if you don't know which one to choose. 
 
 Description
 ===========
@@ -30,11 +31,11 @@ Neti-Neti taxon finder.
 Input: Any text preferably in English
 Output: A list of Scientific Names in the text
 
-To run it:
-$ python neti-server.py
+To run it: (Add a config file named as "neti_http_config.cfg" in the folder config)
+  $ python neti_http_server.py
 
 To use webservice:
-$ ruby webservices/ruby/taxon_finder_web_service.rb
+  $ ruby webservices/ruby/taxon_finder_web_service.rb
 
 API:
 (use your server name instead of localhost:4567)
