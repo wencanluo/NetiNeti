@@ -61,7 +61,7 @@ src/neti_neti_trainer.py      --- Scientific Name classifier -- given a name-lik
 Usage
 =====
 
-Using from (phyton) server:
+Using from (python) server:
 
   from netineti import *
 
