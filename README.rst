@@ -12,7 +12,7 @@ Setting up VirtualEnv (Linux)
   
   * this creates a local environment for the netineti project with all the dependencies installed
   
-  * dependencies => pyyaml, nltk, nose
+  * dependencies => pyyaml, nltk, nose, scikitlearn
   
   * source ~/virtualenvs/neti/bin/activate
   
