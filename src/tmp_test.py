@@ -50,7 +50,7 @@ def standard_deviation(population):
 population = []
 
 time_start = time.clock()
-classifier = NetiNetiTrainer()
+classifier = NetiNetiTrainer(learning_algorithm='NB')
 time_training = time.clock()
 print "Training time: %s" % (time_training - time_start)
 nn = NetiNeti(classifier)
@@ -59,12 +59,19 @@ for i in range(1, num_cycles):
     time_start = time.clock()
     result = nn.find_names(open("data/test.txt").read())
     print "Name finding time: %s" % (time.clock() - time_start)
+    
+    test_result_file = open("data/test_result_after_refactoring.txt", 'w')
+
+    for i in result[1]:
+        test_result_file.write(i + "\n")
+
+    test_result_file.close()
 
     test_result_before_refactoring = open('data/test_result_before_refactoring.txt').read().splitlines()
     test_result_after_refactoring = open('data/test_result_after_refactoring.txt').read().splitlines()
     
     d = difflib.Differ()
-    delta = d.compare(test_result_before_refactoring, test_result_after_refactoring)
+    delta = d.compare(test_result_after_refactoring, test_result_before_refactoring)
     
     ins = []
     outs = []
@@ -80,7 +87,7 @@ for i in range(1, num_cycles):
     recall = (len(test_result_before_refactoring) - len(outs)) * 1.0/len(test_result_before_refactoring)
     
     #precision = TP/N_after
-    precision = (len(test_result_after_refactoring) - len(outs)) * 1.0/len(test_result_before_refactoring)
+    precision = (len(test_result_before_refactoring) - len(outs)) * 1.0/len(test_result_after_refactoring)
     
     f1_score = 2*recall * precision / (recall + precision)
     

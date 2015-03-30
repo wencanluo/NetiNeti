@@ -15,6 +15,11 @@ import nltk
 import random
 import os
 from neti_neti_helper import strip_token, get_words_slice, get_ascii_ratio
+from nltk.classify.scikitlearn import SklearnClassifier
+from sklearn.svm import LinearSVC
+from sklearn.feature_selection import SelectKBest, chi2
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.pipeline import Pipeline
 
 class NetiNetiTrainer:
     """A class that defines the training algorithm and the training files
@@ -313,6 +318,7 @@ class NetiNetiTrainer:
 
         """
         model = None
+        print self.learning_algorithm
         if(self.learning_algorithm == "NB"):
             model = nltk.NaiveBayesClassifier.train(featuresets)
         elif(self.learning_algorithm == "MaxEnt"):
@@ -320,6 +326,16 @@ class NetiNetiTrainer:
                                                  max_iter=15)
         elif(self.learning_algorithm == "DecisionTree"):
             model = nltk.DecisionTreeClassifier.train(featuresets, 0.05)
+        elif(self.learning_algorithm == 'SVM'):
+            model = SklearnClassifier(LinearSVC()).train(featuresets)
+        elif(self.learning_algorithm == 'Pipleline_NB'):
+            pipeline = Pipeline([('chi2', SelectKBest(chi2, k=1000)),
+                      ('nb', MultinomialNB())])
+            model = SklearnClassifier(pipeline).train(featuresets)
+        elif(self.learning_algorithm == 'Pipleline_SVM'):
+            pipeline = Pipeline([('chi2', SelectKBest(chi2, k=1000)),
+                      ('svm', LinearSVC())])
+            model = SklearnClassifier(pipeline).train(featuresets)
         self._model = model
 
     def get_model(self):
