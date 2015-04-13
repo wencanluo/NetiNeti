@@ -53,22 +53,14 @@ Files
 Files                           | Descriptions
 --------------------------------|-------------------------------------------
 `README.md`                     | this file
-`src/data/black_list.txt`       | "black list" for pre filtering,\ 
-                                | common words to decrease number of false 
-                                | positives
+`src/data/black_list.txt`       | "black list" for pre filtering, common words to decrease number of false positives
 `src/data/white_list.txt`       | big training list, run by default
-`src/data/no_names.txt`         | training text w/o scientific names for \
-                                | negative examples
-`src/data/names_in_context.txt` | training list of names and these names in a \
-                                | context of a sentence.
-`src/data/test.txt`             | American Seashells book (with scientific\ 
-                                | names) for testing purposes 
-`src/neti_neti.py`              | Machine Learning based approach to find \
-                                | scientific names
+`src/data/no_names.txt`         | training text w/o scientific names for negative examples
+`src/data/names_in_context.txt` | training list of names and these names in a context of a sentence.
+`src/data/test.txt`             | American Seashells book (with scientific names) for testing purposes 
+`src/neti_neti.py`              | Machine Learning based approach to find scientific names
 `src/neti_neti_helper.py`       | miscellaneous helper functions
-`src/neti_neti_trainer.py`      | Scientific Name classifier -- given a \
-                                | name-like string it accepts or rejects it as 
-                                | a scientific name
+`src/neti_neti_trainer.py`      | Scientific Name classifier -- given a name-like string it accepts or rejects it as a scientific name
 
 
 Usage
