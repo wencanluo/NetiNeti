@@ -17,9 +17,9 @@ import time
 time_start = time.clock()
 
 import pickle
-# classifier = NetiNetiTrainer(learning_algorithm='SVM')
-# with open('classifier_SVM.pickle', 'wb') as handle:
-#     pickle.dump(classifier, handle)
+classifier = NetiNetiTrainer(learning_algorithm='NB')
+with open('classifier_NB.pickle', 'wb') as handle:
+    pickle.dump(classifier, handle)
 #  exit(-1)
 
 with open('classifier_NB.pickle', 'rb') as handle:
