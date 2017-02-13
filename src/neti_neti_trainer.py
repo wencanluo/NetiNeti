@@ -312,11 +312,10 @@ class NetiNetiTrainer:
 
     def _train_classifier_model(self, featuresets):
         """This changes the algorithm that nltk uses to train the model.
-
         Arguments:
         featuresets -- array of features generated for training
-
         """
+        
         model = None
         print self.learning_algorithm
         if(self.learning_algorithm == "NB"):
